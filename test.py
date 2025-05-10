@@ -3,8 +3,8 @@ import cv2
 from ultralytics import YOLO
 import cvzone
 
-# Load YOLOv8 model
-model = YOLO('best.pt')
+
+model = YOLO('')
 names=model.names
 
 
