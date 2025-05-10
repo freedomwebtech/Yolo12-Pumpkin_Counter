@@ -6,9 +6,7 @@ import cvzone
 # Load YOLOv8 model
 model = YOLO('best.pt')
 names=model.names
-line_y=416
-in_count=0
-track_hist={}
+
 
 # Open video file or webcam
 cap = cv2.VideoCapture("vid5.mp4")  # Use 0 for webcam
@@ -45,13 +43,9 @@ while True:
             cx=int(x1+x2)//2
             cy=int(y1+y2)//2
             name=names[class_id]
-            if track_id in track_hist:
-                prev_cx,prev_cy=track_hist[track_id]
-                if (prev_cy<line_y<=cy):
-                  in_count+=1  
-                  cv2.circle(frame,(cx,cy),4,(255,0,0),-1)
-                  cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
-                  cv2.putText(frame, name, (x1 + 3, y1 - 7), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255,255,255), 2)
+            cv2.circle(frame,(cx,cy),4,(255,0,0),-1)
+            cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
+            cv2.putText(frame, name, (x1 + 3, y1 - 7), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255,255,255), 2)
 
             track_hist[track_id]=(cx,cy)
 
@@ -60,11 +54,10 @@ while True:
         
 
        
-    cv2.line(frame,(0,line_y),(frame.shape[1],line_y),(255,255,255),2)
-    cvzone.putTextRect(frame,f'Counter:-{in_count}',(40,60),2,2)
+    
     # Show the frame
     cv2.imshow("RGB", frame)
-    print(track_hist)
+    
     # Press ESC to exit
     if cv2.waitKey(0) & 0xFF == 27:
         break
