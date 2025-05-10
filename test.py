@@ -47,7 +47,7 @@ while True:
             cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
             cv2.putText(frame, name, (x1 + 3, y1 - 7), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255,255,255), 2)
 
-            track_hist[track_id]=(cx,cy)
+            
 
 
             
